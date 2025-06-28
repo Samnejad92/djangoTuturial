@@ -14,3 +14,9 @@ def contact_us(request):
         print(name)
         print(email)
     return render(request,'contact_us.html',context={'message':'Hello, World!'})
+
+def login_page(request):
+    pass
+
+def register_page(request):
+    pass
