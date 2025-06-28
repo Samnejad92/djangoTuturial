@@ -52,15 +52,7 @@
           <div class="col-md-6">
               <form action="" method="post">
                   {% csrf_token %}
-                  {{ contact_form }}
-                  <button class="btn btn-danger">Send</button>
-              </form>
-          </div>
-          <div class="col-md-6">
-              <form action="" method="post">
-                  {% csrf_token %}
-                  <input type="text" name="FullName" class="form-control" placeholder="Enter your full name">
-                  <input type="text" name="Email" class="form-control" placeholder="Enter your email">
+                  {{ login_form }}
                   <button class="btn btn-danger">Send</button>
               </form>
           </div>
