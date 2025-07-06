@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import ContactForm, LoginForm
-from django.contrib.auth import authenticate, login
+from .forms import ContactForm, LoginForm, RegisterForm
+from django.contrib.auth import authenticate, login, get_user_model
 
 
 # Create your views here.
@@ -21,7 +21,7 @@ def contact_us(request):
 
 def login_page(request):
     login_form = LoginForm(request.POST or None)
-    if(login_form.is_valid()):
+    if login_form.is_valid():
         print(login_form.cleaned_data['username'])
         print(login_form.cleaned_data['password'])
         print(login_form.cleaned_data)
@@ -42,10 +42,19 @@ def login_page(request):
     }
     return render(request, 'auth/login.html', context)
 
+User = get_user_model()
 def register_page(request):
+    register_form = RegisterForm(request.POST or None)
+
+    if register_form.is_valid():
+        username = register_form.cleaned_data['username']
+        password = register_form.cleaned_data['password']
+        email = register_form.cleaned_data['email']
+        User.objects.create_user(username=username, email=email, password=password)
+
     context = {
-        'message': 'Hello, World!',
-        'name': 'msamn',
-        'email': '<EMAIL>',
+        'message':'Register Form',
+        'title':'Register Page',
+        'register_form':register_form,
     }
     return render(request, 'auth/register.html', context)
